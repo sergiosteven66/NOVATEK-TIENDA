@@ -212,3 +212,32 @@ class FakeStore {
 
     this.renderProducts();
   }
+ // Agregar producto al carrito
+  addToCart(productId) {
+    const product = this.products.find((p) => p.id === productId);
+    if (!product) return;
+
+    const existingItem = this.cart.find((item) => item.id === productId);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      this.cart.push({
+        ...product,
+        quantity: 1,
+      });
+    }
+
+    this.saveCartToStorage();
+    this.updateCartUI();
+    this.showToast(`${product.title} agregado al carrito`, "success");
+  }
+
+  // Remover producto del carrito
+  removeFromCart(productId) {
+    this.cart = this.cart.filter((item) => item.id !== productId);
+    this.saveCartToStorage();
+    this.updateCartUI();
+    this.renderCartItems();
+    this.showToast("Producto eliminado del carrito", "success");
+  }
