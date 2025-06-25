@@ -57,4 +57,36 @@ class FakeStore {
         this.closeModal();
       }
     });
+    }
+     // Cargar productos desde la API
+  async loadProducts() {
+    try {
+      this.showLoading(true);
+      const response = await fetch("https://fakestoreapi.com/products");
+
+      if (!response.ok) {
+        throw new Error("Error al cargar los productos");
+      }
+
+      this.products = await response.json();
+      this.filteredProducts = [...this.products];
+
+      this.extractCategories();
+      this.renderCategories();
+      this.renderProducts();
+    } catch (error) {
+      console.error("Error:", error);
+      this.showToast("Error al cargar los productos", "error");
+      this.showNoProducts(true);
+    } finally {
+      this.showLoading(false);
+    }
   }
+
+  // Extraer categorías únicas
+  extractCategories() {
+    this.categories = [
+      ...new Set(this.products.map((product) => product.category)),
+    ];
+  }
+
