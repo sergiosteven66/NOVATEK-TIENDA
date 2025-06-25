@@ -377,3 +377,46 @@ class FakeStore {
 
     cartTotal.textContent = this.calculateTotal().toFixed(2);
   }
+
+  // Calcular total del carrito
+  calculateTotal() {
+    return this.cart.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  }
+
+  // Toggle modal del carrito
+  toggleCartModal() {
+    const modal = document.getElementById("cartModal");
+    const overlay = document.getElementById("modalOverlay");
+
+    const isActive = modal.classList.contains("active");
+
+    if (isActive) {
+      modal.classList.remove("active");
+      overlay.classList.remove("active");
+    } else {
+      this.renderCartItems();
+      modal.classList.add("active");
+      overlay.classList.add("active");
+    }
+  }
+
+  // Cerrar modal
+  closeModal() {
+    const modal = document.getElementById("cartModal");
+    const overlay = document.getElementById("modalOverlay");
+
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+  }
+
+  // Guardar carrito en localStorage
+  saveCartToStorage() {
+    try {
+      localStorage.setItem("fakestore-cart", JSON.stringify(this.cart));
+    } catch (error) {
+      console.error("Error al guardar el carrito:", error);
+    }
+  }
