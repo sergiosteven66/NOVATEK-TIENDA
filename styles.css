@@ -10,8 +10,8 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
+  color: #f9fafc;
+  background: #150455; /* Azul oscuro elegante */
 }
 
 .container {
@@ -24,10 +24,10 @@ body {
    Header
    ========================= */
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #0a143a 0%, #1a237e 100%);
+  color: #fff;
+  padding: 2rem 0 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(235, 5, 5, 0.15);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -43,16 +43,24 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.logo i {
-  font-size: 2rem;
+.logo-img {
+  height: 60px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(5, 17, 133, 0.973);
+  background: #0a0366;
+  padding: 0.3rem;
 }
 
 .logo h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #00bfff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* =========================
@@ -123,9 +131,9 @@ body {
    Filtros
    ========================= */
 .filters {
-  background: white;
+  background: rgb(2, 170, 248);
   padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #c4bcbc;
 }
 
 .filters-content {
@@ -147,7 +155,7 @@ body {
 
 .filter-select {
   padding: 0.5rem 1rem;
-  border: 2px solid #ddd;
+  border: 2px solid #a8a7a7;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
@@ -201,7 +209,7 @@ body {
 }
 
 .product-card {
-  background: white;
+  background: #182848;
   border-radius: 15px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -225,8 +233,8 @@ body {
 }
 
 .product-category {
-  background: #667eea;
-  color: white;
+  background: #00bfff;
+  color: #fff;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -236,7 +244,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Título y descripción de producto con truncado multilinea */
 .product-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -282,12 +289,12 @@ body {
 .product-price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: #00bfff;
 }
 
 .add-to-cart-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #00bfff 0%, #1a237e 100%);
+  color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
@@ -300,8 +307,7 @@ body {
 }
 
 .add-to-cart-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 20px rgba(0,191,255,0.25);
 }
 
 /* =========================
@@ -354,7 +360,7 @@ body {
 }
 
 .modal-content {
-  background: white;
+  background: #182848;
   border-radius: 15px;
   width: 90%;
   max-width: 600px;
@@ -376,7 +382,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #333;
+  color: #fff;
 }
 
 .close-btn {
@@ -438,7 +444,7 @@ body {
 }
 
 .cart-item-price {
-  color: #667eea;
+  color: #00bfff;
   font-weight: 600;
 }
 
@@ -539,13 +545,12 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #00bfff 0%, #1a237e 100%);
+  color: #fff;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 20px rgba(0,191,255,0.25);
 }
 
 .btn-secondary {
@@ -564,14 +569,15 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: white;
+  background: #222b45;
+  color: #fff;
+  border-left: 4px solid #00bfff;
   border-radius: 10px;
   padding: 1rem 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transform: translateX(400px);
   transition: transform 0.3s ease;
   z-index: 1001;
-  border-left: 4px solid #28a745;
 }
 
 .toast.show {
@@ -589,19 +595,19 @@ body {
 }
 
 .toast.success {
-  border-left-color: #28a745;
+  border-left-color: #00bfff;
 }
 
 .toast.success .toast-icon {
-  color: #28a745;
+  color: #00bfff;
 }
 
 .toast.error {
-  border-left-color: #dc3545;
+  border-left-color: #ff4757;
 }
 
 .toast.error .toast-icon {
-  color: #dc3545;
+  color: #ff4757;
 }
 
 /* =========================
