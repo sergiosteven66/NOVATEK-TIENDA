@@ -30,3 +30,31 @@ class FakeStore {
     document.getElementById("sortFilter").addEventListener("change", () => {
       this.sortProducts();
     });
+        // Carrito
+    document.getElementById("cartBtn").addEventListener("click", () => {
+      this.toggleCartModal();
+    });
+
+    document.getElementById("closeCart").addEventListener("click", () => {
+      this.toggleCartModal();
+    });
+
+    document.getElementById("modalOverlay").addEventListener("click", () => {
+      this.toggleCartModal();
+    });
+
+    document.getElementById("clearCart").addEventListener("click", () => {
+      this.clearCart();
+    });
+
+    document.getElementById("checkoutBtn").addEventListener("click", () => {
+      this.checkout();
+    });
+
+    // Cerrar modal con ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this.closeModal();
+      }
+    });
+  }
