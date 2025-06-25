@@ -300,8 +300,7 @@ class FakeStore {
       this.toggleCartModal();
     }
   }
-   }
-
+  
   // Actualizar interfaz del carrito
   updateCartUI() {
     const cartCount = document.getElementById("cartCount");
