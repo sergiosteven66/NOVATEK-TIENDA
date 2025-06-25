@@ -300,3 +300,80 @@ class FakeStore {
       this.toggleCartModal();
     }
   }
+   }
+
+  // Actualizar interfaz del carrito
+  updateCartUI() {
+    const cartCount = document.getElementById("cartCount");
+    const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+
+    if (totalItems > 0) {
+      cartCount.style.display = "flex";
+    } else {
+      cartCount.style.display = "none";
+    }
+  }
+
+  // Renderizar items del carrito
+  renderCartItems() {
+    const cartItems = document.getElementById("cartItems");
+    const emptyCart = document.getElementById("emptyCart");
+    const cartTotal = document.getElementById("cartTotal");
+
+    if (this.cart.length === 0) {
+      cartItems.style.display = "none";
+      emptyCart.style.display = "block";
+      cartTotal.textContent = "0.00";
+      return;
+    }
+
+    cartItems.style.display = "block";
+    emptyCart.style.display = "none";
+
+    cartItems.innerHTML = this.cart
+      .map(
+        (item) => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${
+          item.title
+        }" class="cart-item-image"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5OL0E8L3RleHQ+PC9zdmc+'">
+                        
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">${item.price.toFixed(
+                              2
+                            )} c/u</div>
+                        </div>
+                        
+                        <div class="cart-item-controls">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="fakeStore.updateQuantity(${
+                                  item.id
+                                }, -1)" 
+                                        ${item.quantity <= 1 ? "disabled" : ""}>
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="fakeStore.updateQuantity(${
+                                  item.id
+                                }, 1)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            
+                            <button class="remove-item-btn" onclick="fakeStore.removeFromCart(${
+                              item.id
+                            })" 
+                                    title="Eliminar producto">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `
+      )
+      .join("");
+
+    cartTotal.textContent = this.calculateTotal().toFixed(2);
+  }
