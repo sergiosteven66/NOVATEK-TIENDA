@@ -241,3 +241,62 @@ class FakeStore {
     this.renderCartItems();
     this.showToast("Producto eliminado del carrito", "success");
   }
+
+    // Actualizar cantidad de producto en el carrito
+  updateQuantity(productId, change) {
+    const item = this.cart.find((item) => item.id === productId);
+    if (!item) return;
+
+    item.quantity += change;
+
+    if (item.quantity <= 0) {
+      this.removeFromCart(productId);
+      return;
+    }
+
+    this.saveCartToStorage();
+    this.updateCartUI();
+    this.renderCartItems();
+  }
+
+  // Vaciar carrito
+  clearCart() {
+    if (this.cart.length === 0) {
+      this.showToast("El carrito ya está vacío", "error");
+      return;
+    }
+
+    if (confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+      this.cart = [];
+      this.saveCartToStorage();
+      this.updateCartUI();
+      this.renderCartItems();
+      this.showToast("Carrito vaciado", "success");
+    }
+  }
+
+  // Proceder al checkout
+  checkout() {
+    if (this.cart.length === 0) {
+      this.showToast("El carrito está vacío", "error");
+      return;
+    }
+
+    const total = this.calculateTotal();
+    const itemCount = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    if (
+      confirm(
+        `¿Proceder con la compra?\n\nTotal: ${total.toFixed(
+          2
+        )}\nProductos: ${itemCount}`
+      )
+    ) {
+      this.showToast("¡Compra realizada con éxito!", "success");
+      this.cart = [];
+      this.saveCartToStorage();
+      this.updateCartUI();
+      this.renderCartItems();
+      this.toggleCartModal();
+    }
+  }
