@@ -420,3 +420,99 @@ class FakeStore {
       console.error("Error al guardar el carrito:", error);
     }
   }
+   // Cargar carrito desde localStorage
+  loadCartFromStorage() {
+    try {
+      const savedCart = localStorage.getItem("fakestore-cart");
+      if (savedCart) {
+        this.cart = JSON.parse(savedCart);
+      }
+    } catch (error) {
+      console.error("Error al cargar el carrito:", error);
+      this.cart = [];
+    }
+  }
+
+  // Mostrar/ocultar loading
+  showLoading(show) {
+    const loading = document.getElementById("loading");
+    loading.style.display = show ? "flex" : "none";
+  }
+
+  // Mostrar/ocultar mensaje de no productos
+  showNoProducts(show) {
+    const noProducts = document.getElementById("noProducts");
+    noProducts.style.display = show ? "block" : "none";
+  }
+
+  // Mostrar toast notification
+  showToast(message, type = "success") {
+    const toast = document.getElementById("toast");
+    const toastMessage = toast.querySelector(".toast-message");
+    const toastIcon = toast.querySelector(".toast-icon");
+
+    // Configurar mensaje y tipo
+    toastMessage.textContent = message;
+    toast.className = `toast ${type}`;
+
+    // Configurar icono según el tipo
+    if (type === "success") {
+      toastIcon.className = "toast-icon fas fa-check-circle";
+    } else if (type === "error") {
+      toastIcon.className = "toast-icon fas fa-exclamation-circle";
+    }
+
+    // Mostrar toast
+    toast.classList.add("show");
+
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  }
+
+  // Generar estrellas para rating
+  generateStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    let stars = "";
+
+    // Estrellas llenas
+    for (let i = 0; i < fullStars; i++) {
+      stars += '<i class="fas fa-star"></i>';
+    }
+
+    // Media estrella
+    if (hasHalfStar) {
+      stars += '<i class="fas fa-star-half-alt"></i>';
+    }
+
+    // Estrellas vacías
+    for (let i = 0; i < emptyStars; i++) {
+      stars += '<i class="far fa-star"></i>';
+    }
+
+    return stars;
+  }
+
+  // Capitalizar texto
+  capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+}
+
+// Inicializar la aplicación cuando el DOM esté listo
+let fakeStore;
+
+document.addEventListener("DOMContentLoaded", () => {
+  fakeStore = new FakeStore();
+});
+
+// Función global para agregar al carrito (llamada desde el HTML)
+window.addToCart = (productId) => {
+  if (fakeStore) {
+    fakeStore.addToCart(productId);
+  }
+};
