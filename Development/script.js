@@ -164,3 +164,51 @@ class FakeStore {
       )
       .join("");
   }
+
+    // Filtrar productos
+  filterProducts() {
+    const searchTerm = document
+      .getElementById("searchInput")
+      .value.toLowerCase();
+    const categoryFilter = document.getElementById("categoryFilter").value;
+
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesSearch =
+        product.title.toLowerCase().includes(searchTerm) ||
+        product.description.toLowerCase().includes(searchTerm);
+      const matchesCategory =
+        !categoryFilter || product.category === categoryFilter;
+
+      return matchesSearch && matchesCategory;
+    });
+
+    this.sortProducts();
+  }
+
+  // Ordenar productos
+  sortProducts() {
+    const sortValue = document.getElementById("sortFilter").value;
+
+    switch (sortValue) {
+      case "price-asc":
+        this.filteredProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        this.filteredProducts.sort((a, b) => b.price - a.price);
+        break;
+      case "name-asc":
+        this.filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "name-desc":
+        this.filteredProducts.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "rating-desc":
+        this.filteredProducts.sort((a, b) => b.rating.rate - a.rating.rate);
+        break;
+      default:
+        // Orden por defecto (por ID)
+        this.filteredProducts.sort((a, b) => a.id - b.id);
+    }
+
+    this.renderProducts();
+  }
