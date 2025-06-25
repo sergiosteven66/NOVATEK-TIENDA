@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVATEK - Tienda de Tecnología</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content container">
+            <div class="logo">
+                <img src="Images/NOVATEK SIN FONDO-1.png" alt="NOVATEK Logo" class="logo-img" />
+                <h1>NOVATEK</h1>
+            </div>
+            
+            <!-- Barra de búsqueda -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <!-- Carrito -->
+            <div class="cart-container">
+                <button id="cartBtn" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros y ordenamiento -->
+    <section class="filters">
+        <div class="container">
+            <div class="filters-content">
+                <div class="filter-group">
+                    <label for="categoryFilter">Categoría:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sortFilter">Ordenar por:</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="default">Por defecto</option>
+                        <option value="price-asc">Precio: Menor a Mayor</option>
+                        <option value="price-desc">Precio: Mayor a Menor</option>
+                        <option value="name-asc">Nombre: A-Z</option>
+                        <option value="name-desc">Nombre: Z-A</option>
+                        <option value="rating-desc">Mejor calificados</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Cargando productos...</p>
+    </div>
+
+    <!-- Productos -->
+    <main class="main">
+        <div class="container">
+            <div id="productsContainer" class="products-grid">
+                <!-- Los productos se cargarán dinámicamente aquí -->
+            </div>
+            
+            <div id="noProducts" class="no-products" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta con otros términos de búsqueda o filtros</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal del carrito -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Carrito de Compras</h2>
+                <button id="closeCart" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="cartItems" class="cart-items">
+                    <!-- Los items del carrito se cargarán aquí -->
+                </div>
+                
+                <div id="emptyCart" class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Tu carrito está vacío</h3>
+                    <p>Agrega algunos productos para comenzar</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <div class="cart-actions">
+                    <button id="clearCart" class="btn btn-secondary">
+                        <i class="fas fa-trash"></i> Vaciar Carrito
+                    </button>
+                    <button id="checkoutBtn" class="btn btn-primary">
+                        <i class="fas fa-credit-card"></i> Proceder al Pago
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay del modal -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Toast notifications -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+    <script src="Script.js"></script>
+</body>
+</html>
