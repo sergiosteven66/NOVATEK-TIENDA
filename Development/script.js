@@ -58,6 +58,7 @@ class FakeStore {
       }
     });
     }
+
      // Cargar productos desde la API
   async loadProducts() {
     try {
@@ -90,3 +91,76 @@ class FakeStore {
     ];
   }
 
+ // Renderizar opciones de categorías
+  renderCategories() {
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    // Limpiar opciones existentes (excepto "Todas las categorías")
+    while (categoryFilter.children.length > 1) {
+      categoryFilter.removeChild(categoryFilter.lastChild);
+    }
+
+    this.categories.forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = this.capitalize(category);
+      categoryFilter.appendChild(option);
+    });
+  }
+
+  // Renderizar productos
+  renderProducts() {
+    const container = document.getElementById("productsContainer");
+
+    if (this.filteredProducts.length === 0) {
+      this.showNoProducts(true);
+      container.innerHTML = "";
+      return;
+    }
+
+    this.showNoProducts(false);
+
+    container.innerHTML = this.filteredProducts
+      .map(
+        (product) => `
+                    <div class="product-card" data-id="${product.id}">
+                        <img src="${product.image}" alt="${
+          product.title
+        }" class="product-image" 
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlbiBubyBkaXNwb25pYmxlPC90ZXh0Pjwvc3ZnPg=='">
+                        
+                        <div class="product-category">${this.capitalize(
+                          product.category
+                        )}</div>
+                        
+                        <h3 class="product-title">${product.title}</h3>
+                        
+                        <p class="product-description">${
+                          product.description
+                        }</p>
+                        
+                        <div class="product-rating">
+                            <div class="stars">${this.generateStars(
+                              product.rating.rate
+                            )}</div>
+                            <span class="rating-text">(${
+                              product.rating.count
+                            } reseñas)</span>
+                        </div>
+                        
+                        <div class="product-footer">
+                            <div class="product-price">$${product.price.toFixed(
+                              2
+                            )}</div>
+                            <button class="add-to-cart-btn" onclick="fakeStore.addToCart(${
+                              product.id
+                            })">
+                                <i class="fas fa-cart-plus"></i>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                `
+      )
+      .join("");
+  }
