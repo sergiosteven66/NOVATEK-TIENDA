@@ -202,42 +202,11 @@ novatek-project/
    - ✅ Modal de carrito es usable en móvil
    - ✅ Filtros son accesibles en todas las resoluciones
 
-## 🔮 Futuras Mejoras
-
-### Funcionalidades Adicionales
-- [ ] Autenticación de usuarios
-- [ ] Wishlist/Lista de deseos
-- [ ] Reviews y ratings de usuarios
-- [ ] Comparación de productos
-- [ ] Histórico de compras
-
-### Optimizaciones Técnicas
-- [ ] Service Worker para offline functionality
-- [ ] Lazy loading de imágenes más avanzado
-- [ ] Paginación para mejor performance
-- [ ] Optimización de bundle size
-
-### UX/UI Enhancements
-- [ ] Animaciones más sofisticadas
-- [ ] Temas dark/light mode
-- [ ] Filtros más avanzados (precio, rating)
-- [ ] Búsqueda con autocompletado
-
 ## 👨‍💻 Autor
 
-**Tu Nombre**
+**Sergio Lievano**
 - GitHub: [@sergiosteven66](https://github.com/sergiosteven66)
 - Email: slievano212@ejemplo.com
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
-## 🙏 Agradecimientos
-
-- **FakeStore API** por proporcionar datos de prueba gratuitos
-- **Font Awesome** por los iconos
-- **Comunidad de desarrollo web** por recursos y inspiración
 
 ---
 
