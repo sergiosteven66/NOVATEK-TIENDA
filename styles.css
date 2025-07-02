@@ -310,6 +310,26 @@ body {
   box-shadow: 0 4px 20px rgba(0,191,255,0.25);
 }
 
+
+   /*Producto Favorito*/
+
+.product-item.favorite {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.favorite-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ff0000;
+  font-size: 1rem;
+}
+
+.favorite-btn i {
+  margin-right: 5px;
+}
+
 /* =========================
    Mensaje de "No hay productos"
    ========================= */
